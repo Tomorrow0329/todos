@@ -155,7 +155,7 @@ var List = React.createClass ({
   },
   render: function() {
     var _this = this;                 //下面的map()方法中，如果直接用this会报错，因为this的指向不同，所以这里要先声明、引入
-    var listNodes = _this.props.data.map(function(comment) { //这里要用map()方法读取props中的数据，否则会报错，，原因：不详！！！（有待研究）
+    var listNodes = _this.props.data.map(function(comment) {
       //var cx = React.addons.classSet;
       var completed = false;
       if (comment.completed === 'true') {
