@@ -17,6 +17,8 @@
     "react-dom": "^0.14.7"
   },
   "devDependencies": {
-    "babel-cli": "^6.6.4"
+    "babel-cli": "^6.6.4",
+    "gulp": "^3.9.1",
+    "gulp-load-plugins": "^1.2.0"
   }
 }

@@ -44,6 +44,7 @@ body {
   height: 40px;
   font-size: 26px;
   color: gray;
+  display: none;
 }
 .list-ul {
   position: relative;
@@ -65,3 +66,35 @@ body {
 .list:last-child {
   border:none;
 }
+
+.list-checked {
+  text-decoration: line-through;
+}
+.inventory {
+  position: relative;
+  width: 92%;
+  height: 25px;
+  line-height: 30px;
+  padding: 0 4%;
+  font-size: 12px;
+  color: grey;
+}
+.delete-list {
+  display: inline-block;
+  float: right;
+  font-size: 12px;
+  color: lightgrey;
+}
+.delete-list:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.completed {
+ text-decoration: line-through;
+  color: darkgrey;
+}
+.total {
+  float: right;
+}
+

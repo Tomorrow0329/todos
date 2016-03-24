@@ -28,7 +28,6 @@ app.get('/data', function(req, res) {
       console.error(err);
       process.exit(1);
     }
-    console.log(JSON.parse(data));
     res.json(JSON.parse(data));
   });
 });
@@ -45,7 +44,8 @@ app.post('/data', function(req, res) {
     // treat Date.now() as unique-enough for our purposes.
     var newComment = {
       id: Date.now(),
-      content: req.body.content
+      content: req.body.content,
+      completed : req.body.completed
     };
     comments.push(newComment);
     fs.writeFile(COMMENTS_FILE, JSON.stringify(comments, null, 4), function(err) {
@@ -55,6 +55,55 @@ app.post('/data', function(req, res) {
       }
       res.json(comments);
     });
+  });
+});
+
+app.post('/deleteData', function (req, res) {
+  fs.readFile(COMMENTS_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    var comments = JSON.parse(data);
+    var dataId = req.body.id;
+    for (var i = 0; i < comments.length; i++) {
+      if (comments[i].id == dataId) {
+        comments.splice(i,1);
+      }
+    }
+
+    fs.writeFile(COMMENTS_FILE, JSON.stringify(comments, null, 4), function(err) {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+      res.json(comments);
+    });
+  });
+});
+
+app.post('/changeCompleted', function (req, res) {
+  fs.readFile(COMMENTS_FILE, function (err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    var comments = JSON.parse(data);
+    var data = req.body;
+    for (var i = 0; i < comments.length; i++) {
+      if (comments[i].id == data.id) {
+        comments[i].completed = data.completed;
+      }
+    }
+
+    fs.writeFile(COMMENTS_FILE, JSON.stringify(comments, null, 4), function () {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+      res.json(comments);
+    });
+
   });
 });
 
